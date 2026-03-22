@@ -1,0 +1,5 @@
+{
+  "name": "misskey",
+  "version": "1.0.0",
+  "description": "Misskey API integration for posting notes and uploading media"
+}
