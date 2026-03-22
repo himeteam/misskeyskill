@@ -28,26 +28,34 @@ export MISSKEY_TOKEN="your-token-here"
 2. Go to Settings > API > Access Tokens
 3. Create a new token with required permissions
 
+## Popular Misskey Instances
+
+| Instance | URL | Description |
+|----------|-----|-------------|
+| maid.lat | https://maid.lat | メイド情報局 - A Misskey instance for maid lovers |
+| misskey.io | https://misskey.io | Official Misskey instance |
+| misskey.design | https://misskey.design | For designers |
+
 ## Posting
 
 ### Send Text
 
 ```bash
-MISSKEY_HOST="https://your-instance.misskey.io" MISSKEY_TOKEN="xxx" \
-  bash ~/.openclaw/workspace/skills/misskey/scripts/post.sh "Hello, World!"
+MISSKEY_HOST="https://maid.lat" MISSKEY_TOKEN="xxx" \
+  bash ~/.openclaw/workspace/skills/misskey/scripts/post.sh "Hello, Fediverse!"
 ```
 
 ### Send with Image
 
 ```bash
-MISSKEY_HOST="https://your-instance.misskey.io" MISSKEY_TOKEN="xxx" \
+MISSKEY_HOST="https://maid.lat" MISSKEY_TOKEN="xxx" \
   bash ~/.openclaw/workspace/skills/misskey/scripts/post.sh "Image caption" "/path/to/image.png"
 ```
 
 ### Send Multiple Images
 
 ```bash
-MISSKEY_HOST="https://your-instance.misskey.io" MISSKEY_TOKEN="xxx" \
+MISSKEY_HOST="https://maid.lat" MISSKEY_TOKEN="xxx" \
   bash ~/.openclaw/workspace/skills/misskey/scripts/post.sh "Multiple images" "/path/to/img1.png" "/path/to/img2.png"
 ```
 
@@ -56,7 +64,7 @@ MISSKEY_HOST="https://your-instance.misskey.io" MISSKEY_TOKEN="xxx" \
 Upload image to drive separately:
 
 ```bash
-MISSKEY_HOST="https://your-instance.misskey.io" MISSKEY_TOKEN="xxx" \
+MISSKEY_HOST="https://maid.lat" MISSKEY_TOKEN="xxx" \
   bash ~/.openclaw/workspace/skills/misskey/scripts/upload.sh "/path/to/image.png"
 ```
 
@@ -87,11 +95,11 @@ bash post.sh "Hidden content" --cw "Content warning title"
 ## Delete Note
 
 ```bash
-MISSKEY_HOST="https://your-instance.misskey.io" MISSKEY_TOKEN="xxx" \
+MISSKEY_HOST="https://maid.lat" MISSKEY_TOKEN="xxx" \
   bash ~/.openclaw/workspace/skills/misskey/scripts/delete.sh "note-id"
 ```
 
-Get note ID from URL: `https://instance/notes/ak4lrcfalen102bc` → ID is `ak4lrcfalen102bc`
+Get note ID from URL: `https://maid.lat/notes/ak4lrcfalen102bc` → ID is `ak4lrcfalen102bc`
 
 ## API Endpoints
 

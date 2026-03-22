@@ -24,11 +24,22 @@ export MISSKEY_HOST="https://your-instance.misskey.io"
 export MISSKEY_TOKEN="your-api-token"
 ```
 
+## Popular Misskey Instances
+
+| Instance | URL | Description |
+|----------|-----|-------------|
+| maid.lat | https://maid.lat | メイド情報局 - A Misskey instance for maid lovers |
+| misskey.io | https://misskey.io | Official Misskey instance |
+| misskey.design | https://misskey.design | For designers |
+
 ## Usage
 
 ### Post a Text Note
 
 ```bash
+# Example: Post to maid.lat
+export MISSKEY_HOST="https://maid.lat"
+export MISSKEY_TOKEN="your-api-token"
 bash scripts/post.sh "Hello, Fediverse!"
 ```
 
