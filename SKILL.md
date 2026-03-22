@@ -3,117 +3,118 @@ name: misskey
 description: |
   Misskey API integration for posting notes and uploading media to Misskey/Fediverse instances.
   Use when users want to post to Misskey, upload images, or interact with Fediverse.
-  Triggers: "发帖到misskey", "misskey发图", "post to misskey", "fediverse发帖".
+  Triggers: "post to misskey", "misskey upload", "fediverse post", "misskey note".
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
 ---
 
 # Misskey API
 
-发帖和上传图片到 Misskey/Fediverse 实例。
+Post notes and upload images to Misskey/Fediverse instances.
 
-## 配置
+## Configuration
 
-需要设置环境变量或配置文件：
+Set environment variables or create a config file:
 
 ```bash
-# Misskey 实例地址
-export MISSKEY_HOST="https://maid.lat"
-# API Token (从设置 > API 获取)
+# Misskey instance URL
+export MISSKEY_HOST="https://your-instance.misskey.io"
+# API Token (get from Settings > API)
 export MISSKEY_TOKEN="your-token-here"
 ```
 
-**获取 Token：**
-1. 登录 Misskey 实例
-2. 设置 > API > 访问令牌
-3. 创建新令牌，勾选需要的权限
+**Getting a Token:**
+1. Login to your Misskey instance
+2. Go to Settings > API > Access Tokens
+3. Create a new token with required permissions
 
-## 发帖
+## Posting
 
-### 发送文本
+### Send Text
 
 ```bash
-MISSKEY_HOST="https://maid.lat" MISSKEY_TOKEN="xxx" \
-  bash ~/.openclaw/workspace/skills/misskey/scripts/post.sh "你好世界！"
+MISSKEY_HOST="https://your-instance.misskey.io" MISSKEY_TOKEN="xxx" \
+  bash ~/.openclaw/workspace/skills/misskey/scripts/post.sh "Hello, World!"
 ```
 
-### 发送带图片的帖子
+### Send with Image
 
 ```bash
-MISSKEY_HOST="https://maid.lat" MISSKEY_TOKEN="xxx" \
-  bash ~/.openclaw/workspace/skills/misskey/scripts/post.sh "图片说明" "/path/to/image.png"
+MISSKEY_HOST="https://your-instance.misskey.io" MISSKEY_TOKEN="xxx" \
+  bash ~/.openclaw/workspace/skills/misskey/scripts/post.sh "Image caption" "/path/to/image.png"
 ```
 
-### 发送多图帖子
+### Send Multiple Images
 
 ```bash
-MISSKEY_HOST="https://maid.lat" MISSKEY_TOKEN="xxx" \
-  bash ~/.openclaw/workspace/skills/misskey/scripts/post.sh "多图帖子" "/path/to/img1.png" "/path/to/img2.png"
+MISSKEY_HOST="https://your-instance.misskey.io" MISSKEY_TOKEN="xxx" \
+  bash ~/.openclaw/workspace/skills/misskey/scripts/post.sh "Multiple images" "/path/to/img1.png" "/path/to/img2.png"
 ```
 
-## 上传图片
+## Upload Image
 
-单独上传图片到网盘：
+Upload image to drive separately:
 
 ```bash
-MISSKEY_HOST="https://maid.lat" MISSKEY_TOKEN="xxx" \
+MISSKEY_HOST="https://your-instance.misskey.io" MISSKEY_TOKEN="xxx" \
   bash ~/.openclaw/workspace/skills/misskey/scripts/upload.sh "/path/to/image.png"
 ```
 
-## 可见性选项
+## Visibility Options
 
-在帖子文本后添加可见性参数：
-
-```bash
-# 公开（默认）
-bash post.sh "内容" --visibility public
-
-# 首页
-bash post.sh "内容" --visibility home
-
-# 关注者
-bash post.sh "内容" --visibility followers
-
-# 指定用户
-bash post.sh "内容" --visibility specified --visible-user-ids "user-id"
-```
-
-## 添加 CW (内容警告)
+Add visibility parameter after text:
 
 ```bash
-bash post.sh "正文内容" --cw "内容警告标题"
+# Public (default)
+bash post.sh "Content" --visibility public
+
+# Home timeline only
+bash post.sh "Content" --visibility home
+
+# Followers only
+bash post.sh "Content" --visibility followers
+
+# Specified users
+bash post.sh "Content" --visibility specified --visible-user-ids "user-id"
 ```
 
-## 删除帖子
+## Content Warning (CW)
 
 ```bash
-MISSKEY_HOST="https://maid.lat" MISSKEY_TOKEN="xxx" \
-  bash ~/.openclaw/workspace/skills/misskey/scripts/delete.sh "帖子ID"
+bash post.sh "Hidden content" --cw "Content warning title"
 ```
 
-帖子ID 可以从帖子链接获取：`https://maid.lat/notes/ak4lrcfalen102bc` → ID 为 `ak4lrcfalen102bc`
-
-## API 端点
-
-| 端点 | 方法 | 用途 |
-|------|------|------|
-| /api/notes/create | POST | 发帖 |
-| /api/drive/files/create | POST | 上传文件 |
-| /api/i | POST | 获取当前用户信息 |
-
-## 错误处理
-
-- 401: Token 无效或过期
-- 400: 参数错误
-- 429: 请求过于频繁
-
-## 示例：maid.lat 实例
+## Delete Note
 
 ```bash
-# 配置
-export MISSKEY_HOST="https://maid.lat"
-export MISSKEY_TOKEN="your-token"
-
-# 发帖
-bash ~/.openclaw/workspace/skills/misskey/scripts/post.sh "来自 OpenClaw 的测试帖子！"
+MISSKEY_HOST="https://your-instance.misskey.io" MISSKEY_TOKEN="xxx" \
+  bash ~/.openclaw/workspace/skills/misskey/scripts/delete.sh "note-id"
 ```
+
+Get note ID from URL: `https://instance/notes/ak4lrcfalen102bc` → ID is `ak4lrcfalen102bc`
+
+## API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| /api/notes/create | POST | Create note |
+| /api/notes/delete | POST | Delete note |
+| /api/drive/files/create | POST | Upload file |
+| /api/i | POST | Get current user info |
+
+## Error Handling
+
+| Status | Meaning |
+|--------|---------|
+| 401 | Invalid or expired token |
+| 400 | Invalid parameters |
+| 429 | Rate limited |
+
+## Scripts
+
+| Script | Description |
+|--------|-------------|
+| post.sh | Create notes with optional images |
+| delete.sh | Delete notes by ID |
+| upload.sh | Upload files to drive |
+| whoami.sh | Display current user info |
